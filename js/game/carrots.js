@@ -13,6 +13,7 @@ function spawnCarrot() {
 
   const spawn = pick(freeSpots);
   state.carrots.push({
+    id: state.nextCarrotId++,
     x: spawn.x,
     y: spawn.y,
     spawnAnim: 0,

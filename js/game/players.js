@@ -67,7 +67,7 @@ function updatePlayer(player, dt, resolveInput) {
     return;
   }
 
-  const input = resolveInput(player);
+  const input = resolveInput(player, dt);
   player.vx += input.move * GAMEPLAY_CONSTANTS.PLAYER_ACCELERATION * dt;
   player.vx *= player.onGround
     ? GAMEPLAY_CONSTANTS.PLAYER_GROUND_FRICTION

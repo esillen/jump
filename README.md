@@ -2,15 +2,21 @@
 
 ![jump banner](assets/jump-banner.svg)
 
-A fluffy local multiplayer rabbit brawler for the browser.
+A local multiplayer rabbit game for the browser.
 
-## What Is This?
+## What The Game Is
 
-`jump` is a 2D cartoon platform game where up to 4 rabbits battle for points.
+- You play as rabbits in a cute platform arena.
+- Jump on other rabbits to score points.
+- You can also score by eating carrots.
+- Play against people, bots, or a mix.
 
-- Stomp another rabbit's head: `+1 point`
-- Eat carrots: `3 carrots = +1 point`
-- Win by reaching `10 points` or by leading when the `3:00` timer ends
+## How A Match Works
+
+- Players choose a slot on the title screen and ready up.
+- Start the match from the title screen.
+- The game ends when the match objective is reached.
+- Final scores are shown on the end screen.
 
 ## Controls
 
@@ -23,51 +29,16 @@ A fluffy local multiplayer rabbit brawler for the browser.
 
 ### Gamepad
 
-- Left stick / D-pad: move
-- `A` / south button: jump
-- Title screen: `A` ready, `B` unready
+- Move: left stick / D-pad
+- Jump / Ready toggle: `A` (south button)
+- Start match: `Start`
 
-## Features
+## Run Locally
 
-- Local multiplayer for up to 4 players
-- Bots can replace missing players
-- Ready/unready lobby screen
-- Randomly selected airy arena each match
-- Carrot spawn animation and channeling collection mechanic
-- End screen with scores and a winner crown
-- Cute rabbit art + run/jump animation
-- Graphic blood/body-part effects on point-scoring stomps (visual only)
-
-## Run Locally With Python
-
-From the project root, start a static web server:
+From the project folder:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open:
-
-- [http://localhost:8000](http://localhost:8000)
-
-Stop the server with `Ctrl+C`.
-
-## Quick Start
-
-1. Set each slot to `Human`, `Bot`, or `Off`.
-2. Ready up players.
-3. Hit **Start Match**.
-4. Jump. Stomp. Snack. Repeat.
-
-## Tiny Arena Vibe Check
-
-```text
-    .-""-.
-  .'  _   '.      carrot!
- /   (o)   \        ^
-|  .-___-.  |      /|\
-| (  rabbit) |      |
- \  '---'  /      / \
-  '._   _.'
-     ""
-```
+Open [http://localhost:8000](http://localhost:8000)

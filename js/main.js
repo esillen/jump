@@ -9,7 +9,7 @@ let lastTime = performance.now();
 function createDefaultSlots() {
   return Array.from({ length: GAMEPLAY_CONSTANTS.MAX_PLAYERS }, (_, id) => ({
     id,
-    type: id < 2 ? "human" : "bot",
+    type: id < 2 ? "human" : "hard-bot",
     ready: id >= 2,
     gamepadIndex: id
   }));

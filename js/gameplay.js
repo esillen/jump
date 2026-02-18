@@ -9,8 +9,8 @@ import { syncScoreboard } from "./game/scoreboard.js";
 import { getHumanInput } from "./input.js";
 import { state } from "./state.js";
 
-function resolvePlayerInput(player) {
-  if (player.type === "bot") return getBotInput(player, nearestCarrot);
+function resolvePlayerInput(player, dt) {
+  if (player.type.endsWith("bot")) return getBotInput(player, nearestCarrot, dt);
   return getHumanInput(player);
 }
 

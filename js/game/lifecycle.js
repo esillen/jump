@@ -37,7 +37,11 @@ function resetPlayer(slot, spawn) {
     carrots: 0,
     face: 1,
     runPhase: 0,
-    eatAnim: 0
+    eatAnim: 0,
+    aiLockCarrotId: null,
+    aiLockTimer: 0,
+    aiWanderDir: Math.random() < 0.5 ? -1 : 1,
+    aiWanderTimer: rnd(0.2, 1.4)
   };
 }
 
@@ -65,6 +69,7 @@ export function beginMatch() {
   state.bloodMarks = [];
   state.carrotCrumbs = [];
   state.carrots = [];
+  state.nextCarrotId = 1;
   state.carrotTimer = rnd(
     GAMEPLAY_CONSTANTS.CARROT_INITIAL_SPAWN_MIN_SECONDS,
     GAMEPLAY_CONSTANTS.CARROT_INITIAL_SPAWN_MAX_SECONDS
@@ -83,7 +88,7 @@ export function beginMatch() {
 export function backToTitle() {
   setScreen("title");
   state.slots.forEach((slot) => {
-    if (slot.type === "bot") slot.ready = true;
+    if (slot.type.endsWith("bot")) slot.ready = true;
   });
   refreshLobbyReadyChecks();
 }

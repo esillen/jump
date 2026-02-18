@@ -28,6 +28,7 @@ export const state = {
   bloodMarks: [],
   carrotCrumbs: [],
   carrots: [],
+  nextCarrotId: 1,
   carrotTimer: 5,
   childMode: true,
   matchTime: GAMEPLAY_CONSTANTS.MATCH_TIME_SECONDS,
@@ -54,7 +55,8 @@ export function setupLobby(defaultSlots) {
         <label>Type</label>
         <select data-role="type">
           <option value="human">Human</option>
-          <option value="bot">Bot</option>
+          <option value="easy-bot">Easy Bot</option>
+          <option value="hard-bot">Hard Bot</option>
           <option value="off">Off</option>
         </select>
       </div>
@@ -73,7 +75,7 @@ export function setupLobby(defaultSlots) {
       if (slot.type === "off") {
         slot.ready = false;
       }
-      if (slot.type === "bot" && !slot.ready) {
+      if (slot.type.endsWith("bot") && !slot.ready) {
         slot.ready = true;
       }
       updateReadyVisual(card, readyText, slot);

@@ -75,7 +75,7 @@ export function updateTitleInputs() {
       return;
     }
 
-    if (slot.type === "bot") {
+    if (slot.type.endsWith("bot")) {
       slot.ready = true;
     } else {
       const layout = KEYBOARD_LAYOUTS[slot.id % KEYBOARD_LAYOUTS.length];
