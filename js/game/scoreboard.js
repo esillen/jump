@@ -8,7 +8,7 @@ export function syncScoreboard() {
     const block = document.createElement("div");
     block.className = "score";
     block.style.border = `2px solid ${player.outline}`;
-    block.innerHTML = `${player.name}: ${player.score}<small>Kills ${player.kills} | Carrots ${player.carrots}/${GAMEPLAY_CONSTANTS.CARROTS_PER_POINT}</small>`;
+    block.innerHTML = `${player.name}: ${player.score}<small>Points ${player.kills} | Carrots ${player.carrots}/${GAMEPLAY_CONSTANTS.CARROTS_PER_POINT}</small>`;
     ui.scoreboard.appendChild(block);
   });
 

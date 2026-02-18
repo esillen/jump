@@ -36,7 +36,7 @@ A fluffy local multiplayer rabbit brawler for the browser.
 - Carrot spawn animation and channeling collection mechanic
 - End screen with scores and a winner crown
 - Cute rabbit art + run/jump animation
-- Graphic blood/body-part effects on kills (visual only)
+- Graphic blood/body-part effects on point-scoring stomps (visual only)
 
 ## Run Locally With Python
 

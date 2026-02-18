@@ -2,6 +2,8 @@ import { GAMEPLAY_CONSTANTS } from "../GAMEPLAY_CONSTANTS.js";
 import { state } from "../state.js";
 import { rnd } from "../utils.js";
 
+const FLOWER_COLORS = ["#ff8cb8", "#fff0a6", "#c8a8ff", "#ffa180", "#9ee3ff"];
+
 function spawnBloodPool(x, y, sizeScale = 1) {
   state.bloodMarks.push({
     kind: "pool",
@@ -27,8 +29,41 @@ function spawnBloodDrip(x, y, side) {
 }
 
 export function spawnGore(x, y, rabbitColor = "#a20e1a") {
+  if (state.childMode) {
+    for (let i = 0; i < GAMEPLAY_CONSTANTS.GORE_PARTICLE_COUNT; i += 1) {
+      state.particles.push({
+        kind: "flower",
+        x: x + rnd(-12, 12),
+        y: y + rnd(-8, 8),
+        vx: rnd(-250, 250),
+        vy: rnd(-420, -40),
+        life: rnd(0.5, 1.2),
+        size: rnd(2, 5),
+        color: FLOWER_COLORS[Math.floor(rnd(0, FLOWER_COLORS.length))]
+      });
+    }
+
+    for (let i = 0; i < GAMEPLAY_CONSTANTS.GORE_CHUNK_COUNT; i += 1) {
+      state.chunks.push({
+        kind: "flower",
+        x: x + rnd(-8, 8),
+        y: y + rnd(-10, 10),
+        vx: rnd(-160, 160),
+        vy: rnd(-310, -80),
+        rot: rnd(0, Math.PI * 2),
+        vr: rnd(-7, 7),
+        s: rnd(6, 11),
+        color: FLOWER_COLORS[Math.floor(rnd(0, FLOWER_COLORS.length))],
+        ttl: rnd(2.2, 4.6),
+        grounded: false
+      });
+    }
+    return;
+  }
+
   for (let i = 0; i < GAMEPLAY_CONSTANTS.GORE_PARTICLE_COUNT; i += 1) {
     state.particles.push({
+      kind: "blood",
       x: x + rnd(-12, 12),
       y: y + rnd(-8, 8),
       vx: rnd(-250, 250),
@@ -81,6 +116,12 @@ export function updateParticles(dt) {
     particle.vy += GAMEPLAY_CONSTANTS.GRAVITY * 0.75 * dt;
     particle.x += particle.vx * dt;
     particle.y += particle.vy * dt;
+
+    if (particle.kind === "flower") {
+      particle.vx *= 0.98;
+      alive.push(particle);
+      return;
+    }
 
     if (particle.y >= state.arena.groundY) {
       spawnBloodPool(particle.x, state.arena.groundY + 1, particle.size / 4);

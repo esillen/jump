@@ -8,6 +8,7 @@ export const ui = {
   game: document.getElementById("ui-game"),
   end: document.getElementById("ui-end"),
   lobby: document.getElementById("lobby"),
+  childModeToggle: document.getElementById("child-mode-toggle"),
   timer: document.getElementById("timer"),
   scoreboard: document.getElementById("scoreboard"),
   results: document.getElementById("results"),
@@ -28,6 +29,7 @@ export const state = {
   carrotCrumbs: [],
   carrots: [],
   carrotTimer: 5,
+  childMode: true,
   matchTime: GAMEPLAY_CONSTANTS.MATCH_TIME_SECONDS,
   winnerId: null
 };

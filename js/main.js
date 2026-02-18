@@ -36,6 +36,11 @@ function init() {
   setScreen("title");
   setupLobby(createDefaultSlots());
   setupKeyboard();
+  ui.childModeToggle.checked = true;
+  state.childMode = true;
+  ui.childModeToggle.addEventListener("change", () => {
+    state.childMode = ui.childModeToggle.checked;
+  });
 
   ui.backBtn.addEventListener("click", backToTitle);
 

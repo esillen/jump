@@ -25,10 +25,30 @@ export function drawBloodMarks() {
 export function drawParticles() {
   state.particles.forEach((particle) => {
     ctx.globalAlpha = clamp(particle.life, 0, 1);
-    ctx.fillStyle = "#bf1828";
-    ctx.beginPath();
-    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-    ctx.fill();
+    if (particle.kind === "flower") {
+      ctx.fillStyle = particle.color || "#ff8cb8";
+      for (let i = 0; i < 5; i += 1) {
+        const a = (Math.PI * 2 * i) / 5;
+        ctx.beginPath();
+        ctx.arc(
+          particle.x + Math.cos(a) * particle.size * 0.9,
+          particle.y + Math.sin(a) * particle.size * 0.9,
+          particle.size * 0.65,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+      }
+      ctx.fillStyle = "#ffe98a";
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size * 0.45, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillStyle = "#bf1828";
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
   });
   ctx.globalAlpha = 1;
 }
@@ -49,8 +69,23 @@ export function drawChunks() {
     ctx.save();
     ctx.translate(chunk.x, chunk.y);
     ctx.rotate(chunk.rot);
-    ctx.fillStyle = chunk.color || "#a20e1a";
-    ctx.fillRect(-chunk.s * 0.5, -chunk.s * 0.5, chunk.s, chunk.s * 0.75);
+    if (chunk.kind === "flower") {
+      const petal = chunk.s * 0.34;
+      ctx.fillStyle = chunk.color || "#ff8cb8";
+      for (let i = 0; i < 5; i += 1) {
+        const a = (Math.PI * 2 * i) / 5;
+        ctx.beginPath();
+        ctx.arc(Math.cos(a) * petal, Math.sin(a) * petal, petal * 0.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = "#ffe98a";
+      ctx.beginPath();
+      ctx.arc(0, 0, petal * 0.55, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillStyle = chunk.color || "#a20e1a";
+      ctx.fillRect(-chunk.s * 0.5, -chunk.s * 0.5, chunk.s, chunk.s * 0.75);
+    }
     ctx.restore();
   });
 }
