@@ -3,7 +3,7 @@ import { canvas, ctx } from "./state.js";
 import { drawArena, drawArenaLabel } from "./render/arena.js";
 import { drawBackground } from "./render/background.js";
 import { drawPlayers } from "./render/characters.js";
-import { drawChunks, drawParticles } from "./render/effects.js";
+import { drawBloodMarks, drawCarrotCrumbs, drawChunks, drawParticles } from "./render/effects.js";
 import { drawCarrots } from "./render/items.js";
 
 export function drawFrame() {
@@ -28,9 +28,11 @@ export function drawFrame() {
 
   drawBackground();
   drawArena();
+  drawBloodMarks();
   drawChunks();
   drawCarrots();
   drawPlayers();
+  drawCarrotCrumbs();
   drawParticles();
   drawArenaLabel();
 

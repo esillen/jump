@@ -2,7 +2,7 @@ import { GAMEPLAY_CONSTANTS } from "./GAMEPLAY_CONSTANTS.js";
 import { getBotInput } from "./game/ai.js";
 import { updateCarrots, nearestCarrot } from "./game/carrots.js";
 import { resolveStomps } from "./game/combat.js";
-import { updateChunks, updateParticles } from "./game/effects.js";
+import { updateBloodMarks, updateCarrotCrumbs, updateChunks, updateParticles } from "./game/effects.js";
 import { backToTitle as toTitle, beginMatch as startMatch, endMatch } from "./game/lifecycle.js";
 import { updatePlayers } from "./game/players.js";
 import { syncScoreboard } from "./game/scoreboard.js";
@@ -33,7 +33,9 @@ export function updateGame(dt) {
   updatePlayers(dt, resolvePlayerInput);
   resolveStomps();
   updateCarrots(dt);
+  updateCarrotCrumbs(dt);
   updateParticles(dt);
+  updateBloodMarks(dt);
   updateChunks(dt);
   syncScoreboard();
 

@@ -10,33 +10,52 @@ function respawnPlayer(player) {
   player.vy = 0;
   player.onGround = false;
   player.alive = true;
+  player.eatAnim = 0;
 }
 
 function collideWithWorld(player, prevX, prevY) {
   const body = { x: player.x - player.w / 2, y: player.y - player.h / 2, w: player.w, h: player.h };
-  const prevBody = { x: prevX - player.w / 2, y: prevY - player.h / 2, w: player.w, h: player.h };
+  const staticBodies = [
+    {
+      x: 0,
+      y: state.arena.groundY,
+      w: GAMEPLAY_CONSTANTS.WORLD_WIDTH,
+      h: GAMEPLAY_CONSTANTS.WORLD_HEIGHT - state.arena.groundY
+    },
+    ...state.arena.platforms
+  ];
 
-  const ground = {
-    x: 0,
-    y: state.arena.groundY,
-    w: GAMEPLAY_CONSTANTS.WORLD_WIDTH,
-    h: GAMEPLAY_CONSTANTS.WORLD_HEIGHT - state.arena.groundY
-  };
-  if (overlap(body, ground) && prevBody.y + prevBody.h <= ground.y + 2 && player.vy >= 0) {
-    player.y = ground.y - player.h / 2;
-    player.vy = 0;
-    player.onGround = true;
-    body.y = player.y - player.h / 2;
-  }
-
-  // One-way platforms: collide only when landing from above.
-  state.arena.platforms.forEach((platform) => {
+  staticBodies.forEach((platform) => {
     if (!overlap(body, platform)) return;
+
+    const prevBody = { x: prevX - player.w / 2, y: prevY - player.h / 2, w: player.w, h: player.h };
+
     if (prevBody.y + prevBody.h <= platform.y + 2 && player.vy >= 0) {
       player.y = platform.y - player.h / 2;
       player.vy = 0;
       player.onGround = true;
       body.y = player.y - player.h / 2;
+      return;
+    }
+
+    if (prevBody.y >= platform.y + platform.h - 2 && player.vy < 0) {
+      player.y = platform.y + platform.h + player.h / 2;
+      player.vy *= 0.2;
+      body.y = player.y - player.h / 2;
+      return;
+    }
+
+    if (prevBody.x + prevBody.w <= platform.x + 2 && player.vx > 0) {
+      player.x = platform.x - player.w / 2;
+      player.vx = 0;
+      body.x = player.x - player.w / 2;
+      return;
+    }
+
+    if (prevBody.x >= platform.x + platform.w - 2 && player.vx < 0) {
+      player.x = platform.x + platform.w + player.w / 2;
+      player.vx = 0;
+      body.x = player.x - player.w / 2;
     }
   });
 }

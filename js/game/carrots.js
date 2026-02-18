@@ -1,4 +1,5 @@
 import { GAMEPLAY_CONSTANTS } from "../GAMEPLAY_CONSTANTS.js";
+import { spawnCarrotCrumb } from "./effects.js";
 import { state } from "../state.js";
 import { pick, rnd } from "../utils.js";
 
@@ -45,6 +46,10 @@ export function updateCarrots(dt) {
     );
   }
 
+  state.players.forEach((player) => {
+    player.eatAnim = 0;
+  });
+
   state.carrots.forEach((carrot) => {
     carrot.spawnAnim = Math.min(1, carrot.spawnAnim + dt * 2.4);
 
@@ -70,6 +75,9 @@ export function updateCarrots(dt) {
     } else {
       carrot.collectTime += dt;
     }
+
+    collector.eatAnim = Math.max(collector.eatAnim, carrot.collectTime);
+    if (Math.random() < dt * 20) spawnCarrotCrumb(collector);
   });
 
   const collected = state.carrots.filter(

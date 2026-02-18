@@ -35,11 +35,14 @@ export function drawCarrots() {
 
     if (carrot.collector !== null) {
       const progress = carrot.collectTime / GAMEPLAY_CONSTANTS.CARROT_COLLECT_SECONDS;
-      ctx.strokeStyle = "#fff";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.arc(0, 0, 20, -Math.PI / 2, -Math.PI / 2 + progress * Math.PI * 2);
-      ctx.stroke();
+      const barWidth = 40;
+      const barHeight = 7;
+      const barX = -barWidth / 2;
+      const barY = -34;
+      ctx.fillStyle = "rgba(255,255,255,0.92)";
+      ctx.fillRect(barX, barY, barWidth, barHeight);
+      ctx.fillStyle = "#8adf6c";
+      ctx.fillRect(barX + 1, barY + 1, (barWidth - 2) * clamp(progress, 0, 1), barHeight - 2);
     }
 
     ctx.restore();

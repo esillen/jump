@@ -12,7 +12,7 @@ function killPlayer(victim, killer) {
 
   killer.kills += 1;
   killer.score += 1;
-  spawnGore(victim.x, victim.y);
+  spawnGore(victim.x, victim.y, victim.color);
 }
 
 export function resolveStomps() {

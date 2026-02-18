@@ -36,7 +36,8 @@ function resetPlayer(slot, spawn) {
     kills: 0,
     carrots: 0,
     face: 1,
-    runPhase: 0
+    runPhase: 0,
+    eatAnim: 0
   };
 }
 
@@ -61,6 +62,8 @@ export function beginMatch() {
   state.decorations = makeDecorations();
   state.particles = [];
   state.chunks = [];
+  state.bloodMarks = [];
+  state.carrotCrumbs = [];
   state.carrots = [];
   state.carrotTimer = rnd(
     GAMEPLAY_CONSTANTS.CARROT_INITIAL_SPAWN_MIN_SECONDS,

@@ -24,6 +24,8 @@ export const state = {
   decorations: [],
   particles: [],
   chunks: [],
+  bloodMarks: [],
+  carrotCrumbs: [],
   carrots: [],
   carrotTimer: 5,
   matchTime: GAMEPLAY_CONSTANTS.MATCH_TIME_SECONDS,
