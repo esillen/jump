@@ -1,0 +1,271 @@
+:root {
+  --sky-a: #c6f2ff;
+  --sky-b: #ecfbff;
+  --grass: #7fd363;
+  --grass-deep: #5fb84a;
+  --panel: rgba(255, 255, 255, 0.9);
+  --ink: #2c3e32;
+  --accent: #f08e6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Trebuchet MS", "Comic Sans MS", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--sky-a), var(--sky-b));
+}
+
+#game {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.screen.active {
+  display: flex;
+}
+
+#ui-title,
+#ui-end {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  pointer-events: all;
+}
+
+#ui-title {
+  background: linear-gradient(180deg, rgba(226, 250, 255, 0.9), rgba(240, 255, 244, 0.88));
+  overflow: hidden;
+}
+
+.title-card {
+  width: min(920px, 94vw);
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  background: rgba(255, 255, 255, 0.86);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  padding: 20px 20px 16px;
+  box-shadow: 0 16px 45px rgba(104, 171, 143, 0.2);
+}
+
+.fluff {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  pointer-events: none;
+}
+
+.fluff-a {
+  width: 320px;
+  height: 130px;
+  top: 46px;
+  left: 5vw;
+}
+
+.fluff-b {
+  width: 260px;
+  height: 110px;
+  top: 92px;
+  right: 8vw;
+}
+
+#ui-end {
+  background: rgba(212, 248, 253, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(56px, 10vw, 120px);
+  line-height: 1;
+  color: #ff8a66;
+  text-shadow: 0 6px 0 #fff;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 20px;
+}
+
+#lobby {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 12px;
+  width: min(860px, 92vw);
+}
+
+.slot {
+  background: var(--panel);
+  border-radius: 16px;
+  border: 2px solid rgba(170, 224, 193, 0.6);
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.slot.ready {
+  background: rgba(239, 255, 244, 0.95);
+  border-color: rgba(122, 199, 149, 0.9);
+}
+
+.slot h3 {
+  margin: 0;
+}
+
+.slot-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.slot input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.slot select,
+button {
+  font: inherit;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background: #fff;
+  color: var(--ink);
+  padding: 6px 10px;
+}
+
+.ready-pill {
+  display: inline-block;
+  min-width: 88px;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #ffe0d3;
+  color: #8a4b33;
+}
+
+.ready-pill.on {
+  background: #d9f7dd;
+  color: #2f7740;
+}
+
+.title-actions {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+#title-hint {
+  margin: 0;
+}
+
+#start-hint {
+  margin: 0;
+}
+
+.controls-help {
+  background: rgba(255, 255, 255, 0.88);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+}
+
+.hud {
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  pointer-events: none;
+}
+
+#timer {
+  font-size: 40px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 4px 12px;
+}
+
+#scoreboard {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.score {
+  min-width: 125px;
+  border-radius: 12px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.82);
+  font-weight: 700;
+}
+
+.score small {
+  display: block;
+  font-weight: 400;
+}
+
+#results {
+  display: grid;
+  gap: 8px;
+  width: min(460px, 80vw);
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+}
+
+.crown {
+  font-size: 24px;
+}
+
+@media (max-width: 900px) {
+  #lobby {
+    grid-template-columns: 1fr;
+    width: min(460px, 92vw);
+  }
+
+  .title-card {
+    width: min(470px, 94vw);
+    padding: 14px 12px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  #timer {
+    font-size: 30px;
+  }
+
+  #scoreboard {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 66vw;
+  }
+}

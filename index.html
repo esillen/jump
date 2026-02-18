@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jump</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="ui-title" class="screen active">
+      <div class="fluff fluff-a"></div>
+      <div class="fluff fluff-b"></div>
+      <div class="title-card">
+        <h1>jump</h1>
+        <p class="subtitle">Cute local rabbit chaos. Stomp heads. Eat carrots. Win.</p>
+        <div id="lobby"></div>
+        <div class="title-actions">
+          <p id="title-hint">Press your jump button to Ready/Unready.</p>
+          <p id="start-hint">Press <strong>Space</strong> or gamepad <strong>Start</strong> to begin.</p>
+        </div>
+      </div>
+      <div class="controls-help">
+        <strong>Keyboard:</strong> P1 A/D/W, P2 ←/→/↑, P3 J/L/I, P4 F/H/T
+      </div>
+    </div>
+
+    <div id="ui-game" class="screen hud">
+      <div id="timer">3:00</div>
+      <div id="scoreboard"></div>
+    </div>
+
+    <div id="ui-end" class="screen">
+      <h2>Match Over</h2>
+      <div id="results"></div>
+      <button id="back-btn">Back To Title</button>
+    </div>
+
+    <canvas id="game" width="1280" height="720"></canvas>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
